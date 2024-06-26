@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Hours Prediction</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #f3f4f6;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        background: #ffffff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+      }
+      .container h2 {
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+      .container label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #555;
+      }
+      .container input[type="number"] {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .container button {
+        width: 100%;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 5px;
+        background: #007bff;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .container button:hover {
+        background: #0056b3;
+      }
+      .result {
+        margin-top: 1rem;
+        color: #007bff;
+      }
+      .banner {
+        width: 100%;
+        max-width: 1200px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      src="{{ url_for('static', filename='images/university_banner.png') }}"
+      alt="University Banner"
+      class="banner"
+    />
+    <div class="container">
+      <h2>Predict Student Marks</h2>
+      <form action="/predict" method="POST">
+        <label for="study_hours">Enter Study Hours</label>
+        <input
+          type="number"
+          id="study_hours"
+          name="study_hours"
+          step="0.1"
+          required
+        />
+        <button type="submit">Predict Marks</button>
+      </form>
+      {% if prediction %}
+      <div class="result">
+        <h3>Predicted Marks: {{ prediction }}</h3>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
